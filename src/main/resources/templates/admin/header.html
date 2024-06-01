@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+
+<div th:fragment="header" class="horizontal-menu">
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-content">
+                <a href="/admin/dashboard" class="navbar-brand"></a>
+                <ul class="nav page-navigation">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/dashboard">
+                            <i class="link-icon" data-feather="grid"></i>
+                            <span class="menu-title">DASHBOARD</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="link-icon" data-feather="home"></i>
+                            <span class="menu-title">MAIN</span>
+                            <i class="link-arrow"></i>
+                        </a>
+                        <div class="submenu">
+                            <ul class="submenu-item">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/admin/channel">채널 관리</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/admin/program">프로그램 관리</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/admin/channel-region">지역별 채널정보 관리</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="link-icon" data-feather="user"></i>
+                            <span class="menu-title">채용</span>
+                            <i class="link-arrow"></i>
+                        </a>
+                        <div class="submenu">
+                            <ul class="submenu-item">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/admin/recruit">채용게시판 관리</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="link-icon" data-feather="gift"></i>
+                            <span class="menu-title">이벤트</span>
+                            <i class="link-arrow"></i>
+                        </a>
+                        <div class="submenu">
+                            <ul class="submenu-item">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/admin/event">이벤트 관리</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/admin/event/prize">당첨자 관리</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="link-icon" data-feather="edit"></i>
+                            <span class="menu-title">사업문의</span>
+                            <i class="link-arrow"></i>
+                        </a>
+                        <div class="submenu">
+                            <ul class="submenu-item">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/admin/ad">광고안내 관리</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/admin/partnership">사업제휴문의 관리</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="link-icon" data-feather="layers"></i>
+                            <span class="menu-title">공통관리</span>
+                            <i class="link-arrow"></i>
+                        </a>
+                        <div class="submenu">
+                            <ul class="submenu-item">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/admin/notice">공지사항 관리</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/admin/popup">팝업 관리</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/admin/inquiry">1:1 문의 관리</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/admin/search">검색어 관리</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/admin/consent">이용동의 관리</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/admin/statistics">통계관리</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="link-icon" data-feather="users"></i>
+                            <span class="menu-title">회원관리</span>
+                            <i class="link-arrow"></i>
+                        </a>
+                        <div class="submenu">
+                            <ul class="submenu-item">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/admin/user">회원리스트</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/admin/sms">SMS 발송관리</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/admin/mail">메일발송관리</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="link-icon" data-feather="file-text"></i>
+                            <span class="menu-title">푸터관리</span>
+                            <i class="link-arrow"></i>
+                        </a>
+                        <div class="submenu">
+                            <ul class="submenu-item">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/admin/terms">이용약관 관리</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/admin/privacy">개인정보처리방침관리</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/admin/video-policy">영상정보처리기기운영방침관리</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/admin/denial">부정신고 관리</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a
+                                class="nav-link dropdown-toggle"
+                                href="#"
+                                id="notificationDropdown"
+                                role="button"
+                                data-bs-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false">
+                            <i data-feather="bell"></i>
+                            <div class="indicator">
+                                <div class="circle">
+                                    <span>6</span></div>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu p-0" aria-labelledby="notificationDropdown">
+                            <div
+                                    class="px-3 py-2 d-flex align-items-center justify-content-between border-bottom">
+                                <p>6개의 새로운 알림</p>
+                                <a href="javascript:;" class="text-muted">모두 지우기</a>
+                            </div>
+                            <div class="p-1">
+                                <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
+                                    <div
+                                            class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
+                                        <i class="icon-sm text-white" data-feather="gift"></i>
+                                    </div>
+                                    <div class="flex-grow-1 me-2">
+                                        <p>New Order Recieved</p>
+                                        <p class="tx-12 text-muted">30 min ago</p>
+                                    </div>
+                                </a>
+                                <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
+                                    <div
+                                            class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
+                                        <i class="icon-sm text-white" data-feather="alert-circle"></i>
+                                    </div>
+                                    <div class="flex-grow-1 me-2">
+                                        <p>Server Limit Reached!</p>
+                                        <p class="tx-12 text-muted">1 hrs ago</p>
+                                    </div>
+                                </a>
+                                <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
+                                    <div
+                                            class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
+                                        <img
+                                                class="wd-30 ht-30 rounded-circle"
+                                                src="https://via.placeholder.com/30x30"
+                                                alt="userr">
+                                    </div>
+                                    <div class="flex-grow-1 me-2">
+                                        <p>New customer registered</p>
+                                        <p class="tx-12 text-muted">2 sec ago</p>
+                                    </div>
+                                </a>
+                                <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
+                                    <div
+                                            class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
+                                        <i class="icon-sm text-white" data-feather="layers"></i>
+                                    </div>
+                                    <div class="flex-grow-1 me-2">
+                                        <p>Apps are ready for update</p>
+                                        <p class="tx-12 text-muted">5 hrs ago</p>
+                                    </div>
+                                </a>
+                                <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
+                                    <div
+                                            class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
+                                        <i class="icon-sm text-white" data-feather="download"></i>
+                                    </div>
+                                    <div class="flex-grow-1 me-2">
+                                        <p>Download completed</p>
+                                        <p class="tx-12 text-muted">6 hrs ago</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div
+                                    class="px-3 py-2 d-flex align-items-center justify-content-center border-top">
+                                <a href="javascript:;">View all</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="empower.html">
+                            <i class="link-icon" data-feather="settings"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item gap-3">
+                        <div class="nav-profile-info">
+                            <p class="tx-12">광고영업1팀</p>
+                            <p class="tx-14 fw-bolder">김쿼카</p>
+                        </div>
+                        <a class="nav-link nav-profile" href="edit.html">
+                            <img
+                                    src="https://media.bunjang.co.kr/product/239665958_2_1697515350_w360.jpg"
+                                    alt="">
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="empower.html">
+                            <i class="link-icon" data-feather="log-out"></i>
+                        </a>
+                    </li>
+                </ul>
+                <button
+                        class="navbar-toggler navbar-toggler-right d-lg-none align-self-center"
+                        type="button"
+                        data-toggle="horizontal-menu-toggle">
+                    <i data-feather="menu"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<script>
+
+</script>
+</body>
+</html>

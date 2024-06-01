@@ -1,0 +1,79 @@
+<configuration>
+
+    <!-- Prod 환경 설정 (1주일 단위, 30일보관, INFO 레벨 이상, SQL 문 포함 X) -->
+    <springProfile name="prod">
+        <appender name="FILE-PROD" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>logs/prod.log</file>
+            <encoder>
+                <pattern>%d{"yyyy-MM-dd HH:mm:ss"} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            </encoder>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <!-- 일주일 단위로 로그 파일 분할 -->
+                <fileNamePattern>logs/prod.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+                <!-- 로그 파일 보관 기간 -->
+                <maxHistory>30</maxHistory>
+                <!-- 로그 파일 최대 크기 -->
+                <totalSizeCap>1GB</totalSizeCap>
+            </rollingPolicy>
+        </appender>
+
+        <root level="info">
+            <appender-ref ref="FILE-PROD" />
+        </root>
+    </springProfile>
+
+    <!-- Dev 환경 설정 (1주일 단위, 10일보관, DEBUG 레벨 이상, SQL 문 포함 O) -->
+    <springProfile name="dev">
+        <appender name="FILE-DEV" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>logs/dev.log</file>
+            <encoder>
+                <pattern>%d{"yyyy-MM-dd HH:mm:ss"} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            </encoder>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <!-- 일주일 단위로 로그 파일 분할 -->
+                <fileNamePattern>logs/dev.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+                <!-- 로그 파일 보관 기간 -->
+                <maxHistory>10</maxHistory>
+                <!-- 로그 파일 최대 크기 -->
+                <totalSizeCap>1GB</totalSizeCap>
+            </rollingPolicy>
+        </appender>
+
+        <root level="debug">
+            <appender-ref ref="FILE-DEV" />
+        </root>
+    </springProfile>
+
+    <!-- Local 환경 설정 (파일 저장 X, TRACE 레벨 이상, SQL 문 포함 O) -->
+    <springProfile name="local">
+        <appender name="STDOUT-LOCAL" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>%d{"yyyy-MM-dd HH:mm:ss"} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <root level="debug">
+            <appender-ref ref="STDOUT-LOCAL" />
+        </root>
+    </springProfile>
+
+    <logger name="log4jdbc.debug" level="ERROR" />
+    <logger name="org.mybatis.spring" level="ERROR" />
+    <logger name="org.springframework" level="ERROR" />
+    <logger name="_org.springframework.web.servlet" level="ERROR" />
+    <logger name="com.zaxxer.hikari.HikariConfig" level="WARN" />
+    <logger name="org.thymeleaf.TemplateEngine" level="WARN" />
+    <!-- SQL 로깅 설정 -->
+    <logger name="jdbc.sqlonly" level="DEBUG"/>
+    <logger name="jdbc.sqltiming" level="WARN"/>
+    <logger name="jdbc.audit" level="WARN"/>
+    <logger name="jdbc.resultset" level="WARN"/>
+    <logger name="jdbc.resultsettable" level="DEBUG"/>
+    <logger name="jdbc.connection" level="WARN"/>
+    <!-- JPA 로깅 설정 -->
+    <logger name="org.hibernate" level="ERROR" />
+    <logger name="org.hibernate.SQL" level="DEBUG"/>
+    <!-- yauaa -->
+    <logger name="nl.basjes.parse.useragent" level="WARN" />
+
+</configuration>

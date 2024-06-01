@@ -1,0 +1,37 @@
+/* Pretendard */
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 400;
+    src: url(../fonts/Pretendard-R.woff2) format('woff2'),
+        url(../fonts/Pretendard-R.woff) format('woff');
+}
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 500;
+    src: url(../fonts/Pretendard-M.woff2) format('woff2'),
+        url(../fonts/Pretendard-M.woff) format('woff');
+}
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 600;
+    src: url(../fonts/Pretendard-Sb.woff2) format('woff2'),
+        url(../fonts/Pretendard-Sb.woff) format('woff');
+}
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 700;
+    src: url(../fonts/Pretendard-B.woff2) format('woff2'),
+        url(../fonts/Pretendard-B.woff) format('woff');
+}
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 800;
+    src: url(../fonts/Pretendard-Eb.woff2) format('woff2'),
+        url(../fonts/Pretendard-Eb.woff) format('woff');
+}
+@font-face {
+    font-family: 'Pretendard';
+    font-weight: 900;
+    src: url(../fonts/Pretendard-Bk.woff2) format('woff2'),
+        url(../fonts/Pretendard-Bk.woff) format('woff');
+}

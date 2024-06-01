@@ -1,0 +1,79 @@
+spring:
+  profiles:
+    include: local
+  main:
+    allow-bean-definition-overriding: true
+  mvc:
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: true
+  jpa:
+    properties.hibernate:
+      show_sql: true
+      format_sql: true
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+
+  jackson:
+    date-format: 'yyyy-MM-dd HH:mm:ss'
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+
+mybatis:
+  mapper-locations:
+    - classpath:/mapper/*.xml
+    - classpath:/mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    call-setters-on-nulls: true
+  type-aliases-package: com.yangjae.lupine.util, com.yangjae.lupine.model.dto
+
+jasypt:
+  encryptor:
+    bean: encryptorBean
+
+aes.secret-key: "YourSecretKey"
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: local
+
+  datasource:
+    url: jdbc:postgresql://61.74.236.156:5432/postgres
+    username: ckkang
+    password: 0808
+    driver-class-name: org.postgresql.Driver
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  datasource:
+    url: jdbc:log4jdbc:mysql://110.8.133.196:3306/tcast?useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 3091
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+  datasource:
+    url: jdbc:log4jdbc:mysql://110.8.133.196:3306/tcast?useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 3091
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy

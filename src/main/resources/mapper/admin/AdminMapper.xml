@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yangjae.lupine.admin.mapper.AdminMapper">
+
+	<select id="selectAdminByIdx" parameterType="int" resultType="CamelHashMap">
+		SELECT A.idx, A.id, A.name,
+			   A.last_login_date,
+			   A.created_at, A.created_by, updated_at, A.updated_by
+		FROM admin A
+		WHERE A.idx = #{adminIdx}
+	</select>
+
+	<update id="updateAdmin" parameterType="AdminDto">
+		UPDATE admin
+		SET id = #{id}, name = #{name}
+		WHERE idx = #{idx}
+	</update>
+</mapper>

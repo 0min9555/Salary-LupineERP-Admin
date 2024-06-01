@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+    <head>
+        <title>티캐스트 Admin</title>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="format-detection" content="telephone=no"/>
+
+        <meta name="description" content="티캐스트 Admin">
+        <meta name="keyword" content="티캐스트 Admin">
+
+        <meta property="og:title" content="티캐스트 Admin">
+        <meta property="og:description" content="티캐스트 Admin">
+        <meta property="og:image" content="opengraph.png">
+
+        <!-- <link rel="apple-touch-icon" sizes="57x57"
+        href="favicon/apple-icon-57x57.png"> <link rel="apple-touch-icon" sizes="60x60"
+        href="favicon/apple-icon-60x60.png"> <link rel="apple-touch-icon" sizes="72x72"
+        href="favicon/apple-icon-72x72.png"> <link rel="apple-touch-icon" sizes="76x76"
+        href="favicon/apple-icon-76x76.png"> <link rel="apple-touch-icon"
+        sizes="114x114" href="favicon/apple-icon-114x114.png"> <link
+        rel="apple-touch-icon" sizes="120x120" href="favicon/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144"
+        href="favicon/apple-icon-144x144.png"> <link rel="apple-touch-icon"
+        sizes="152x152" href="favicon/apple-icon-152x152.png"> <link
+        rel="apple-touch-icon" sizes="180x180" href="favicon/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"
+        href="favicon/android-icon-192x192.png"> <link rel="icon" type="image/png"
+        sizes="16x16" href="favicon/favicon-16x16.png"> <link rel="icon"
+        type="image/png" sizes="32x32" href="favicon/favicon-32x32.png"> <link
+        rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
+        <meta name="msapplication-TileImage" content="favicon/ms-icon-144x144.png">
+        <link rel="manifest" href="favicon/manifest.json"> <meta
+        name="msapplication-TileColor" content="#ffffff"> <meta name="theme-color"
+        content="#ffffff"> -->
+
+        <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+        <link rel="stylesheet" href="/admin/assets/css/style.css">
+        <link rel="stylesheet" href="/admin/assets/fonts/feather-font/css/iconfont.css">
+        <link rel="stylesheet" href="/admin/assets/vendors/core/core.css">
+        <link rel="stylesheet" href="/admin/assets/vendors/flatpickr/flatpickr.min.css">
+
+        <style>
+            .login-wrapper {}
+            .horizontal-menu {
+                position: absolute;
+            }
+            .horizontal-menu .navbar {
+                background-color: transparent;
+            }
+            .login-back {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                background-size: cover;
+                background-position: center;
+            }
+            .login-back:after {
+                content: "";
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                background-color: rgba(0,0,0,0.6);
+            }
+            .login-content {
+                width: 100%;
+                max-width: 400px;
+                /* position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%); */
+                color: #fff;
+                text-align: center;
+                position: relative;
+            }
+            .login-wrap {
+                border-radius: 0.25em;
+                background-color: rgba(255,255,255,0.2);
+                padding: 20px;
+            }
+            .login-wrap .form-control {
+                background-color: transparent;
+                color: #fff;
+                border-radius: 0;
+                padding-bottom: 10px;
+                border: 0;
+                border-bottom: 1px solid #fff;
+            }
+            .login-wrap .input-eyes {
+                border: 0;
+                background-color: transparent;
+                color: #fff;
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                right: 0;
+                z-index: 500;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .login-wrap .input-eyes .on {
+                display: none;
+            }
+            .login-wrap .input-eyes.on .off {
+                display: none;
+            }
+            .login-wrap .input-eyes.on .on {
+                display: block;
+            }
+        </style>
+
+    </head>
+    <body>
+        <div class="login-wrapper" id="app">
+
+            <div class="horizontal-menu">
+                <nav class="navbar">
+                    <div class="container">
+                    </div>
+                </nav>
+            </div>
+
+            <div class="page-wrapper full-page">
+                <div
+                    class="login-back"
+                    style="background-image:url(/admin/assets/images/login_back.jpg)"></div>
+
+                <div class="page-content flex-center">
+                    <div class="login-content">
+                        <form th:action="@{/admin/login}" method="post">
+                            <h3 class="mb-2">월루~</h3>
+                            <p class="mb-3">월루 관리자 사이트 입니다.
+                                <br/>아이디와 비밀번호를 입력하신 후 로그인 버튼을 눌러주세요.</p>
+                            <div class="login-wrap mb-3">
+                                <div class="mb-3">
+                                    <label for="username" class="form-label hidden">아이디</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="username"
+                                        name="username"
+                                        autocomplete="off"
+                                        placeholder="ID">
+                                </div>
+                                <div class="input-group">
+                                    <label for="password" class="form-label hidden">패스워드</label>
+                                    <input
+                                        type="password"
+                                        class="form-control"
+                                        id="password"
+                                        name="password"
+                                        autocomplete="off"
+                                        placeholder="PW">
+                                    <button type="button" class="input-eyes">
+                                        <i data-feather="eye-off" class="off icon-md"></i>
+                                        <i data-feather="eye" class="on icon-md"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-check form-switch mb-2 text-start">
+                                    <input type="checkbox" class="form-check-input" id="switch">
+                                    <label class="form-check-label" for="switch">Remember me</label>
+                                </div>
+                            </div>
+                            <div class="d-grid grid-2 mb-3">
+                                <button type="submit" class="btn btn-secondary">LOGIN</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <script src="/admin/assets/js/jquery-3.6.0.min.js"></script>
+        <script src="/admin/assets/vendors/core/core.js"></script>
+        <script src="/admin/assets/vendors/feather-icons/feather.min.js"></script>
+        <script src="/admin/assets/vendors/flatpickr/flatpickr.min.js"></script>
+        <script src="/admin/assets/js/template.js"></script>
+
+        <script type="text/javascript">
+            $(function () {
+                'use strict';
+                new Vue({el: '#app', methods: {}});
+
+                $('.input-eyes').on('click', function () {
+                    $(this).toggleClass('on');
+
+                    if ($(this).hasClass('on')) {
+                        $(this)
+                            .siblings('input')
+                            .attr('type', "text");
+                    } else {
+                        $(this)
+                            .siblings('input')
+                            .attr('type', "password");
+                    }
+                });
+            })
+        </script>
+
+    </body>
+</html>
